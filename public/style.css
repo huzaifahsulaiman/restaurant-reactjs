@@ -1,0 +1,20 @@
+.icon {
+  font-size: 125%;
+  margin: 15px;
+  color: #fff;
+  cursor: "pointer";
+  transition: color 0.2s;
+}
+
+.ion-logo-facebook:hover {
+  color: #3b5998;
+}
+.ion-logo-twitter:hover {
+  color: #00aced;
+}
+.ion-logo-instagram:hover {
+  color: #517fa4;
+}
+.ion-logo-youtube:hover {
+  color: #cc181e;
+}
