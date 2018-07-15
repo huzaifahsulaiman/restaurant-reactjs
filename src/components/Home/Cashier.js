@@ -58,11 +58,11 @@ class Cashier extends React.Component {
         ) : (
           this.state.order.map(data => (
             <CashierCard
+              key={data.order_id}
               restaurant_id={this.props.id}
               order_id={data.order_id}
               customer_name={data.customer_name}
               total_price={data.total_price}
-              status={data.status}
               items={data.items}
             />
           ))

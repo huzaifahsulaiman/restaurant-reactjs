@@ -21,7 +21,7 @@ export const kitchenDishes = restaurant_id => dispatch => {
 
 //Item ready (item_id)
 export const kitchenItemReady = item_id => {
-  axios
+  return axios
     .post(
       "http://13.58.187.48/api/restaurants/managers/kitchen/dish-ready",
       item_id
@@ -61,7 +61,9 @@ export const waiterItemServed = item_id => {
       "http://13.58.187.48/api/restaurants/managers/waiter/dish-served",
       item_id
     )
-    .then(res => res.data);
+    .then(res => {
+      return res.data;
+    });
 };
 
 const fetchWaiter = payload => {

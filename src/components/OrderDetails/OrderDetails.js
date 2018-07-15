@@ -11,6 +11,7 @@ import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Divider from "@material-ui/core/Divider";
+import { orderHistoryDishesDetail } from "../../store/actions/historyActions";
 
 //************************************************************************
 
@@ -47,14 +48,28 @@ const styles = theme => ({
 class OrderDetails extends Component {
   state = {
     manager_id: localStorage.getItem("manager_id"),
-    order_id: "#3215464",
-    totalPrice: "25.00",
-    date: "01-01-2018",
-    order_status: "Paid",
+    order_id: "",
+    totalPrice: "",
+    date: "",
+    order_status: "",
     disabled: false
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const idFromURL = window.location.pathname;
+    console.log(idFromURL);
+    const id = idFromURL.split("order-id:");
+    const order_id = {
+      order_id: id[1]
+    };
+
+    orderHistoryDishesDetail(order_id).then(response => {
+      this.setState({
+        order_id: id[1],
+        totalPrice: response.total_price
+      });
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -77,14 +92,14 @@ class OrderDetails extends Component {
               </ListItemText>
             </ListItem>
           </List>
-          <div className={classes.buttonContainer}>
+          {/* <div className={classes.buttonContainer}>
             <Button variant="raised" color="secondary">
               Pay
             </Button>
             <Typography variant="caption" color="secondary">
               Status: {this.state.order_status}
             </Typography>
-          </div>
+          </div> */}
         </Paper>
         <List
           disablePadding

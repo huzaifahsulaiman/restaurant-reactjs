@@ -23,7 +23,7 @@ import OrderDetails from "./components/OrderDetails/OrderDetails";
 
 import Home from "./components/Home/Home";
 
-import History from "./components/History/History";
+import OrderHistory from "./components/History/OrderHistory";
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
@@ -113,15 +113,7 @@ class App extends Component {
 
         {/* Order History */}
         <Switch>
-          <PrivateRoute exact path="/order-history" component={History} />
-        </Switch>
-
-        <Switch>
-          <PrivateRoute
-            exact
-            path="/order-history/order-details::handle"
-            component={OrderDetails}
-          />
+          <PrivateRoute exact path="/order-history" component={OrderHistory} />
         </Switch>
 
         {/* Public Page */}

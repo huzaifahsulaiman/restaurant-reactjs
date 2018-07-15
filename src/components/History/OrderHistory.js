@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
-import HistoryCard from "../Cards/HistoryCard";
+import OrderDetails from "./OrderDetails";
 import { orderHistory } from "../../store/actions/historyActions";
 import isEmpty from "../../validation/isEmpty";
 
@@ -38,11 +38,18 @@ const styles = theme => ({
   }
 });
 
-class History extends React.Component {
+class OrderHistory extends React.Component {
   state = {
     order_history: "",
     restaurant_id: localStorage.getItem("restaurant_id"),
-    isHistoryEmpty: true
+    isHistoryEmpty: true,
+    expanded: null
+  };
+
+  handleChange = fromChild => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? fromChild : false
+    });
   };
 
   componentDidMount() {
@@ -71,6 +78,7 @@ class History extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { expanded } = this.state;
 
     return (
       <div className={classes.root}>
@@ -88,10 +96,13 @@ class History extends React.Component {
             <p>Empty</p>
           ) : (
             this.state.order_history.map(data => (
-              <HistoryCard
+              <OrderDetails
+                key={data.order_id}
                 order_id={data.order_id}
                 customers_name={data.customers_name}
                 total_price={data.total_price}
+                childHandleChange={this.handleChange}
+                expanded={expanded}
               />
             ))
           )}
@@ -112,4 +123,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { orderHistory }
-)(withStyles(styles)(History));
+)(withStyles(styles)(OrderHistory));

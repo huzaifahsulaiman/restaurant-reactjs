@@ -33,6 +33,7 @@ class Waiter extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { waiter } = nextProps.home;
+
     // Check the existence of content of Waiter
     if (isEmpty(waiter)) {
       this.setState({
@@ -56,14 +57,17 @@ class Waiter extends React.Component {
         {this.state.isWaiterEmpty ? (
           <p>Empty</p>
         ) : (
-          this.state.order.map(data => (
-            <WaiterCard
-              restaurant_id={this.props.id}
-              item_id={data.item_id}
-              order_id={data.order_id}
-              dish_name={data.dish_name}
-            />
-          ))
+          this.state.dishesList.map(data => {
+            return (
+              <WaiterCard
+                key={data.item_id}
+                restaurant_id={this.props.id}
+                item_id={data.item_id}
+                order_id={data.order_id}
+                dish_name={data.dish_name}
+              />
+            );
+          })
         )}
       </div>
     );

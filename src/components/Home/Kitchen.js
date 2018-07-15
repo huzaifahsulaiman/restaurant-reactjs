@@ -53,17 +53,18 @@ class Kitchen extends React.Component {
     return (
       <div className={classes.root}>
         {/* show mapped KitchenCard here */}
-        {this.state.isKitchenEmpty ? (
-          <p>Empty</p>
-        ) : (
+        {!this.state.isKitchenEmpty ? (
           this.state.dishesList.map(data => (
             <KitchenCard
+              key={data.item_id}
               item_id={data.item_id}
               order_id={data.order_id}
               dish_name={data.dish_name}
               restaurant_id={this.props.id}
             />
           ))
+        ) : (
+          <p>Empty</p>
         )}
       </div>
     );

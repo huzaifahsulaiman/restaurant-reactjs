@@ -75,6 +75,7 @@ class ThemeImage extends Component {
     if (this.state.theme_images) {
       list = this.state.theme_images.map(data => (
         <ImageCard
+          key={data.theme_image_id}
           callChange={this.handleRadioChange}
           selected_id={this.state.selected_id}
           theme_image_id={data.theme_image_id}

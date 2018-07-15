@@ -42,15 +42,17 @@ const styles = theme => ({
 });
 
 class CashierCard extends React.Component {
-  state = {};
+  state = {
+    order_id: this.props.order_id
+  };
 
   handleClick = () => {
     const order_id = {
-      item_id: this.state.order_id
+      order_id: this.state.order_id
     };
 
     cashierOrderPaid(order_id).then(response => {
-      if (response.state === "200") {
+      if (response.status === "200") {
         const restaurant_id = {
           restaurant_id: this.props.restaurant_id
         };
@@ -62,7 +64,6 @@ class CashierCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <Card className={classes.root}>
         <List dense disablePadding className={classes.details}>
@@ -84,7 +85,6 @@ class CashierCard extends React.Component {
           <Button onClick={this.handleClick} variant="outlined" color="primary">
             Pay
           </Button>
-          <Typography variant="caption">Status: {this.props.status}</Typography>
         </div>
       </Card>
     );

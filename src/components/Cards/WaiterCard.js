@@ -45,7 +45,7 @@ class WaiterCard extends React.Component {
     };
 
     waiterItemServed(item_id).then(response => {
-      if (response.state === "200") {
+      if (response.status === "200") {
         const restaurant_id = {
           restaurant_id: this.props.restaurant_id
         };
